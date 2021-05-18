@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D27E2132653B733005A0397 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D27E2122653B733005A0397 /* API.swift */; };
 		4DABBF27264E5A9D0044C06D /* RequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABBF26264E5A9D0044C06D /* RequestBody.swift */; };
 		4DAE26BC264E6992008A1712 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE26BB264E6992008A1712 /* MockURLProtocol.swift */; };
 		C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D27E2122653B733005A0397 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		4DABBF26264E5A9D0044C06D /* RequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBody.swift; sourceTree = "<group>"; };
 		4DAE26BB264E6992008A1712 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		C70FB0F725BEF61C00C9924E /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,8 +104,9 @@
 		EAC68449264A55FE002A9CE3 /* OpenMarketTests */ = {
 			isa = PBXGroup;
 			children = (
-				EAC6844A264A55FE002A9CE3 /* OpenMarketJSONParsingTests.swift */,
+				4D27E2122653B733005A0397 /* API.swift */,
 				4DAE26BB264E6992008A1712 /* MockURLProtocol.swift */,
+				EAC6844A264A55FE002A9CE3 /* OpenMarketJSONParsingTests.swift */,
 				EAC6844C264A55FE002A9CE3 /* Info.plist */,
 			);
 			path = OpenMarketTests;
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE938B8264AD034009737E0 /* OpenMarketJSONParsingTests.swift in Sources */,
+				4D27E2132653B733005A0397 /* API.swift in Sources */,
 				4DAE26BC264E6992008A1712 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +383,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8RK7C6KQ99;
 				INFOPLIST_FILE = OpenMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -398,6 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8RK7C6KQ99;
 				INFOPLIST_FILE = OpenMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (

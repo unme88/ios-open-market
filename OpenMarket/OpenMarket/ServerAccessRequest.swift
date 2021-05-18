@@ -7,43 +7,13 @@
 
 import Foundation
 
-struct MarketItemList: Decodable {
+struct JokeReponse: Decodable {
     let page: Int
-    let items: [Item]
+    let items: Joke
 }
 
-struct Item: Decodable {
+struct Joke: Decodable {
     let id: Int
     let title: String
     let price: Int
-    let currency: String
-    let stock: Int
-    let discountedPrice: Int?
-    let thumbnails: [String]
-    let registrationDate: Double
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, title, price, currency, stock, thumbnails
-        case discountedPrice = "discounted_price"
-        case registrationDate = "registration_date"
-    }
-}
-
-struct ItemPage: Decodable {
-    let id: Int
-    let title: String
-    let descriptions: String
-    let price: Int
-    let currency: String
-    let stock: Int
-    let discountedPrice: Int?
-    let thumbnails: [String]
-    let images: [String]
-    let registrationDate: Double
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, title, descriptions, price, currency, stock, thumbnails, images
-        case discountedPrice = "discounted_price"
-        case registrationDate = "registration_date"
-    }
 }
