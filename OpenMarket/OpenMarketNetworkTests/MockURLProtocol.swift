@@ -23,16 +23,16 @@ class MockURLProtocol: URLProtocol {
         guard let handler = MockURLProtocol.requestHandler else {
             fatalError("Handler is unavailable.")
         }
-    
+        
         do {
             let (response, data) = try handler(request)
-        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-        
-        guard let data = data else { return }
-        
-        client?.urlProtocol(self, didLoad: data)
-        client?.urlProtocolDidFinishLoading(self)
-        
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            
+            guard let resultData = data else { return }
+            
+            client?.urlProtocol(self, didLoad: resultData)
+            client?.urlProtocolDidFinishLoading(self)
+            
         } catch {
             client?.urlProtocol(self, didFailWithError: error)
         }
