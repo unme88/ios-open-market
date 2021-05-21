@@ -7,8 +7,7 @@
 
 import XCTest
 @testable import OpenMarket
-// internal으로 선언되면 접근 원래는 불가능
-// testable을 통해 접근가능
+
 class OpenMarketNetworkTests: XCTestCase {
     
     var sut_openMarketAPIProvider: OpenMarketAPIProvider!
@@ -16,7 +15,6 @@ class OpenMarketNetworkTests: XCTestCase {
     override func setUpWithError() throws {
         setUpProtocolClassesConfiguration()
         try super.setUpWithError()
-        
     }
     
     override func tearDownWithError() throws {
@@ -43,10 +41,8 @@ class OpenMarketNetworkTests: XCTestCase {
         
         MockURLProtocol.requestHandler = { request in
             guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) else {
-                print("no response")
                 throw APIError.invalidApproach
             }
-            
             return (response, SampleOpenMarketAPI.connection.itemListData)
         }
         // when
@@ -88,14 +84,12 @@ class OpenMarketNetworkTests: XCTestCase {
                     expectation.fulfill()
                     return
                 }
-                
                 XCTAssertEqual(error, APIError.invalidApproach, "Parsing error was expected.")
             }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1.0)
     }
-    
 }
 
 extension MarketItemList: Equatable {
@@ -108,5 +102,4 @@ extension DetailedItemInformation: Equatable {
     public static func == (lhs: DetailedItemInformation, rhs: DetailedItemInformation) -> Bool {
         return lhs.id == rhs.id
     }
-    
 }

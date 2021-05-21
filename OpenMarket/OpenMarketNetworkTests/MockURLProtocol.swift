@@ -21,7 +21,7 @@ class MockURLProtocol: URLProtocol {
     
     override func startLoading() {
         guard let handler = MockURLProtocol.requestHandler else {
-            fatalError("Handler is unavailable.")
+            return
         }
         
         do {
@@ -36,12 +36,8 @@ class MockURLProtocol: URLProtocol {
         } catch {
             client?.urlProtocol(self, didFailWithError: error)
         }
-        
-        
     }
     
     override func stopLoading() {
-        
     }
-    
 }
