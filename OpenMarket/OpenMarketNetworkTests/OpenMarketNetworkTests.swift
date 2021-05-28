@@ -44,13 +44,13 @@ class OpenMarketNetworkTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) else {
                 print("no response")
-                throw APIError.invalidApproach
+                throw APIError.network
             }
             
             return (response, SampleOpenMarketAPI.connection.itemListData)
         }
         // when
-        sut_openMarketAPIProvider.fetchItemListData { result in
+        sut_openMarketAPIProvider.getItemListData { result in
             switch result {
         // then
             case .success(let responseData):
@@ -72,12 +72,12 @@ class OpenMarketNetworkTests: XCTestCase {
         let data = Data()
         MockURLProtocol.requestHandler = { request in
             guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) else {
-                throw APIError.invalidApproach
+                throw APIError.network
             }
             return (response, data)
         }
         // when
-        sut_openMarketAPIProvider.fetchItemListData { result in
+        sut_openMarketAPIProvider.getItemListData { result in
             switch result {
         // then
             case .success(_):
