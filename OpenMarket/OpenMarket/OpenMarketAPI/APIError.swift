@@ -8,8 +8,14 @@
 import Foundation
 
 enum APIError: LocalizedError {
-    case invalidApproach
-    var errorDescription: String? {
-        "unknownError"
+    case networking
+    case decoding
+    var errorDescription: String {
+        switch self {
+        case .networking:
+            return "network Error occurred."
+        case .decoding:
+            return "data was not decoded properly."
+        }
     }
 }
