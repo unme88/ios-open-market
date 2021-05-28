@@ -14,9 +14,12 @@ class OpenMarketAPIProvider {
         self.urlSession = urlSession
     }
     
-    func fetchItemListData(completion: @escaping(_ result: Result <MarketItemList, Error>) -> Void) {
-        guard let url = URL(string: "https://camp-open-market-2.herokuapp.com/Items/2") else { return }
-        let dataTask = urlSession.dataTask(with: url) { data, response, error in
+    func getItemListData(page: Int, completion: @escaping(_ result: Result <MarketItemList, Error>) -> Void) {
+        guard let url = URL(string: "https://camp-open-market-2.herokuapp.com/items/\(page)") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let dataTask = urlSession.dataTask(with: request) { data, response, error in
             do {
                 if let error = error {
                     completion(Result.failure(error))
@@ -24,7 +27,7 @@ class OpenMarketAPIProvider {
                 }
                 
                 guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else {
-                    completion(Result.failure(APIError.invalidApproach))
+                    completion(Result.failure(APIError.networking))
                     return
                 }
                 
@@ -32,7 +35,7 @@ class OpenMarketAPIProvider {
                    let object = try? JSONDecoder().decode(MarketItemList.self, from: data)  {
                     completion(Result.success(object))
                 } else {
-                    throw APIError.invalidApproach
+                    throw APIError.networking
                 }
             } catch {
                 completion(Result.failure(error))
