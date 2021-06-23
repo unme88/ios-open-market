@@ -13,6 +13,7 @@
 		4D899539267359B30043E81A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D899537267359B30043E81A /* TableViewCell.swift */; };
 		4D89953A267359B30043E81A /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D899538267359B30043E81A /* TableViewCell.xib */; };
 		4DABBF27264E5A9D0044C06D /* RequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABBF26264E5A9D0044C06D /* RequestBody.swift */; };
+		4DF4E66826836B3900DB76EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4E66726836B3900DB76EF /* NetworkManager.swift */; };
 		C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */; };
 		C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */; };
 		C70FB10225BEF61C00C9924E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70FB10025BEF61C00C9924E /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		4D899537267359B30043E81A /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		4D899538267359B30043E81A /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		4DABBF26264E5A9D0044C06D /* RequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBody.swift; sourceTree = "<group>"; };
+		4DF4E66726836B3900DB76EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C70FB0F725BEF61C00C9924E /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		4DF4E66626836B2100DB76EF /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				4DF4E66726836B3900DB76EF /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		C70FB0EE25BEF61C00C9924E = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				4D4C09AA26771E91001EFE78 /* 기타 */,
+				4DF4E66626836B2100DB76EF /* NetworkManager */,
 				EAEC6E682656297C0035337C /* OpenMarketAPI */,
 				4D97F0AE2679BBCA00A46F9A /* Cell */,
 				C70FB10025BEF61C00C9924E /* Main.storyboard */,
@@ -235,6 +246,7 @@
 				4D4C09B226778075001EFE78 /* MainViewController.swift in Sources */,
 				4D899539267359B30043E81A /* TableViewCell.swift in Sources */,
 				EAC68443264A4C46002A9CE3 /* ServerAccessRequest.swift in Sources */,
+				4DF4E66826836B3900DB76EF /* NetworkManager.swift in Sources */,
 				C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */,
 				4DABBF27264E5A9D0044C06D /* RequestBody.swift in Sources */,
 				C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */,

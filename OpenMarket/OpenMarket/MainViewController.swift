@@ -23,8 +23,6 @@ class MainViewController: UIViewController {
         activity.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activity.center = view.center
         
-        mainView.addSubview(tableView)
-        mainView.addSubview(collectionView)
         mainView.addSubview(activity)
     
         tableView.delegate = self
