@@ -112,8 +112,20 @@ class MainViewController: UIViewController {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewItemCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
             let item: ItemInformation = self.items[indexPath.row]
-            let imageURL: URL! = URL(string: item.thumbnails.first!)
-            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return cell }
+            
+            DispatchQueue.global().async {
+                guard let imageURL: URL = URL(string: item.thumbnails.first!) else { return }
+                guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
+                
+                DispatchQueue.main.async {
+                    if let index: IndexPath = tableView.indexPath(for: cell) {
+                        if index.row == indexPath.row {
+                            cell.itemThumbnail.image = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            
             let originalPrice = formatNumber(inputNumber: item.price)
             
             cell.itemName.text = item.title
@@ -134,7 +146,6 @@ class MainViewController: UIViewController {
                 cell.itemDiscounted.isHidden = true
             }
             
-            cell.itemThumbnail.image = UIImage(data: imageData)
             cell.itemThumbnail.adjustsImageSizeForAccessibilityContentSizeCategory = false
             cell.itemThumbnail.sizeToFit()
             
@@ -157,8 +168,20 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewItemCell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
         let item: ItemInformation = self.items[indexPath.row]
-        let imageURL: URL! = URL(string: item.thumbnails.first!)
-        guard let imageData: Data = try? Data(contentsOf: imageURL) else { return cell }
+        
+        DispatchQueue.global().async {
+            guard let imageURL: URL = URL(string: item.thumbnails.first!) else { return }
+            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.async {
+                if let index: IndexPath = collectionView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                        cell.itemThumbnail.image = UIImage(data: imageData)
+                    }
+                }
+            }
+        }
+        
         let originalPrice = formatNumber(inputNumber: item.price)
         
         cell.itemName.text = item.title
@@ -179,7 +202,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.itemDiscounted.isHidden = true
         }
         
-        cell.itemThumbnail.image = UIImage(data: imageData)
         cell.itemThumbnail.adjustsImageSizeForAccessibilityContentSizeCategory = false
         cell.itemThumbnail.sizeToFit()
         
