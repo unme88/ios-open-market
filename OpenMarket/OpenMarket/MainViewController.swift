@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MainViewController: UIViewController {
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -105,50 +105,53 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         guard let formattedNumber = numberFormatter.string(for: inputNumber) else { return "" }
         return formattedNumber
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewItemCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
-        let item: ItemInformation = self.items[indexPath.row]
-        let imageURL: URL! = URL(string: item.thumbnails.first!)
-        guard let imageData: Data = try? Data(contentsOf: imageURL) else { return cell }
-        let originalPrice = formatNumber(inputNumber: item.price)
-        
-        cell.itemName.text = item.title
-        
-        if let discountedPrice = item.discountedPrice {
-            let formattedDiscountedPrice = formatNumber(inputNumber: discountedPrice)
-            let attributeString =  NSMutableAttributedString(string: "\(item.currency) \(String(describing: originalPrice))")
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
-                                                 value: NSUnderlineStyle.single.rawValue,
-                                                     range: NSMakeRange(0, attributeString.length))
-            cell.itemPrice.attributedText = attributeString
-            cell.itemDiscounted.text = "\(item.currency) \(formattedDiscountedPrice)"
-            cell.itemPrice.textColor = .red
-            cell.itemDiscounted.textColor = .systemGray
-        } else {
-            cell.itemPrice.textColor = .systemGray
-            cell.itemPrice.text = "\(item.currency) \(String(describing: originalPrice))"
-            cell.itemDiscounted.isHidden = true
+}
+    extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return items.count
         }
         
-        cell.itemThumbnail.image = UIImage(data: imageData)
-        cell.itemThumbnail.adjustsImageSizeForAccessibilityContentSizeCategory = false
-        cell.itemThumbnail.sizeToFit()
-        
-        if item.stock == 0 {
-            cell.itemQuantity.text = "품절"
-            cell.itemQuantity.textColor = .orange
-        } else {
-            cell.itemQuantity.text = "잔여 수량: \(item.stock)"
-            cell.itemQuantity.textColor = .systemGray
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewItemCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
+            let item: ItemInformation = self.items[indexPath.row]
+            let imageURL: URL! = URL(string: item.thumbnails.first!)
+            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return cell }
+            let originalPrice = formatNumber(inputNumber: item.price)
+            
+            cell.itemName.text = item.title
+            
+            if let discountedPrice = item.discountedPrice {
+                let formattedDiscountedPrice = formatNumber(inputNumber: discountedPrice)
+                let attributeString =  NSMutableAttributedString(string: "\(item.currency) \(String(describing: originalPrice))")
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                                     value: NSUnderlineStyle.single.rawValue,
+                                                         range: NSMakeRange(0, attributeString.length))
+                cell.itemPrice.attributedText = attributeString
+                cell.itemDiscounted.text = "\(item.currency) \(formattedDiscountedPrice)"
+                cell.itemPrice.textColor = .red
+                cell.itemDiscounted.textColor = .systemGray
+            } else {
+                cell.itemPrice.textColor = .systemGray
+                cell.itemPrice.text = "\(item.currency) \(String(describing: originalPrice))"
+                cell.itemDiscounted.isHidden = true
+            }
+            
+            cell.itemThumbnail.image = UIImage(data: imageData)
+            cell.itemThumbnail.adjustsImageSizeForAccessibilityContentSizeCategory = false
+            cell.itemThumbnail.sizeToFit()
+            
+            if item.stock == 0 {
+                cell.itemQuantity.text = "품절"
+                cell.itemQuantity.textColor = .orange
+            } else {
+                cell.itemQuantity.text = "잔여 수량: \(item.stock)"
+                cell.itemQuantity.textColor = .systemGray
+            }
+            return cell
         }
-        return cell
     }
     
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
@@ -207,7 +210,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.collectionView.collectionViewLayout = flowLayout
     }
-    
+}
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 250)
     }
