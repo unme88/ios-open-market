@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,  UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -48,7 +48,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        getItemInformation()
+    }
+    
+    func getItemInformation() {
         let urlString = "https://camp-open-market-2.herokuapp.com/items/1"
         guard let url = URL(string: urlString) else { return }
         
@@ -99,7 +102,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func formatNumber(inputNumber: Int) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: inputNumber)) else { return "" }
+        guard let formattedNumber = numberFormatter.string(for: inputNumber) else { return "" }
         return formattedNumber
     }
     
