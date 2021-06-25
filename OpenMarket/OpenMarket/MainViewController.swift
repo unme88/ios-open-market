@@ -72,6 +72,7 @@ class MainViewController: UIViewController {
                 
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.collectionView.isPrefetchingEnabled = false
                         self.collectionView.reloadData()
                         self.activity.stopAnimating()
                         self.tableView.isHidden = false
@@ -81,6 +82,7 @@ class MainViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+
         dataTask.resume()
     }
     
@@ -112,6 +114,7 @@ class MainViewController: UIViewController {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewItemCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
             let item: ItemInformation = self.items[indexPath.row]
+            cell.imageView?.image = nil
             
             DispatchQueue.global().async {
                 guard let imageURL: URL = URL(string: item.thumbnails.first!) else { return }
@@ -168,11 +171,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewItemCell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
         let item: ItemInformation = self.items[indexPath.row]
+        cell.itemThumbnail?.image = nil
         
         DispatchQueue.global().async {
             guard let imageURL: URL = URL(string: item.thumbnails.first!) else { return }
             guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
-            
+
             DispatchQueue.main.async {
                 if let index: IndexPath = collectionView.indexPath(for: cell) {
                     if index.row == indexPath.row {
@@ -181,7 +185,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
         }
-        
+
         let originalPrice = formatNumber(inputNumber: item.price)
         
         cell.itemName.text = item.title
